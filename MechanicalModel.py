@@ -1,9 +1,11 @@
 import numpy as np
+from numba import jit
 
 g = 9.81
 DIM_STATES = 18
 DIM_OBSERVATIONS = 20
 
+@jit(nopython=True)
 def state_to_obs(x, legs, imus):
     """
     Compute the observation vector for a given collection of state vectors
@@ -122,7 +124,8 @@ def state_to_obs(x, legs, imus):
 
     return y
     
-    
+
+@jit(nopython=True)
 def compute_jacobian_obs(x, legs, imus):
     """
     Compute the Jacobian of the state-observation-transition at a given point
